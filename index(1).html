@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu 🤍</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,sans-serif;color:#633f4c;background:linear-gradient(135deg,#fff0f5,#ffe4ee,#fff8fb);overflow:hidden}
+.page{display:none;min-height:100vh;padding:24px;align-items:center;justify-content:center;text-align:center}
+.page.active{display:flex;animation:fade .6s ease}
+.card{width:min(430px,100%);padding:32px 24px;border-radius:28px;background:#ffffffc7;box-shadow:0 15px 45px #8c526022;backdrop-filter:blur(10px)}
+h1,h2{color:#96536d}
+h1{font-size:29px}h2{font-size:24px}
+p{font-size:16px;line-height:1.8}
+.heart{font-size:42px;animation:pulse 1.5s infinite}
+button{border:0;border-radius:999px;padding:13px 20px;margin-top:18px;background:#e98aaa;color:white;font-weight:bold;cursor:pointer;box-shadow:0 8px 18px #d56d8c40}
+button:active{transform:scale(.96)}
+.letter{text-align:left}
+.love-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-height:55vh;overflow:hidden}
+.love{opacity:0;color:#d36d91;font-size:14px;animation:pop .45s ease forwards}
+.love:nth-child(2n){color:#e28eaa}.love:nth-child(3n){color:#c85d85}
+.question{font-size:25px;font-weight:bold;color:#9b526f}
+.options{display:flex;flex-direction:column;gap:2px}.options button{width:100%}
+.final-title{font-size:28px;color:#d05e83;font-weight:bold}.final-text{font-size:19px}
+.floating{position:fixed;z-index:5;pointer-events:none;animation:float 4s linear forwards}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.12)}}
+@keyframes pop{to{opacity:1;transform:scale(1)}}
+@keyframes float{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-110vh) translateX(var(--x)) rotate(360deg);opacity:0}}
+</style>
+</head>
+<body>
+<section class="page active" id="p1"><div class="card"><div class="heart">💌</div><h1>“Hei, kamu…”</h1><p>Aku tahu mungkin kamu lagi nggak pengen denger apa-apa dari aku.</p><p>Tapi boleh kasih aku sedikit waktu untuk menyampaikan sesuatu?</p><button onclick="next(2)">Boleh, lanjut →</button></div></section>
+<section class="page" id="p2"><div class="card"><div class="heart">🥺</div><h2>“Aku mau jujur”</h2><p>Aku sebenarnya bingung harus mulai dari mana, tapi aku tahu satu hal…</p><h1>aku salah.</h1><button onclick="next(3)">Lanjut…</button></div></section>
+<section class="page" id="p3"><div class="card letter"><h2>💗 Isi hati</h2><p>Aku mau minta maaf.</p><p>Mungkin kata “maaf” terdengar sederhana, tapi kali ini aku benar-benar ingin kamu tahu kalau aku sadar aku sudah melakukan kesalahan dan mungkin membuat kamu kecewa atau terluka.</p><p>Aku nggak bermaksud untuk membuat kamu merasa seperti itu. Tapi aku juga nggak mau menjadikan itu alasan untuk membela diriku sendiri. Kalau sikap atau perkataanku membuat hati kamu sakit, aku benar-benar minta maaf.</p><p>Aku sayang sama kamu. Dan justru karena aku sayang, aku nggak mau masalah ini membuat kita saling menjauh.</p><div style="text-align:center"><button onclick="next(4)">Lanjut →</button></div></div></section>
+<section class="page" id="p4"><div class="card"><div class="heart">🫶</div><h2>“Tanda cinta”</h2><div class="love-grid" id="loveGrid"></div><button id="loveButton" onclick="next(5)" style="display:none">Lanjut →</button></div></section>
+<section class="page" id="p5"><div class="card"><div class="heart">🥹</div><div class="question">kamu mau maafin aku kann?🩷🩷</div><p>Aku cuma berharap masih ada tempat buat aku memperbaiki semuanya.</p><div class="options"><button onclick="next(6)">🤍 aku maafin kamu cantik imutt</button><button onclick="next(6)">🥺 iya sayang cintaku aku maafin</button></div></div></section>
+<section class="page" id="p6"><div class="card"><div class="heart">💗</div><div class="final-title">YEAYY</div><p class="final-text">makasih yaa udah mau maafin akuu 🥹💗</p><p class="final-text"><b>I love you. Always. ♡</b></p></div></section>
+<script>
+function next(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active');if(n===4)makeLove();if(n===6)celebrate()}
+function makeLove(){let g=document.getElementById('loveGrid');if(g.children.length)return;for(let i=0;i<36;i++){let x=document.createElement('div');x.className='love';x.textContent='I love you';x.style.animationDelay=(i*.08)+'s';g.appendChild(x)}setTimeout(()=>document.getElementById('loveButton').style.display='inline-block',3200)}
+function celebrate(){for(let i=0;i<36;i++){let x=document.createElement('div');x.className='floating';x.textContent=['💗','💕','🌸','🌷','🤍','✨'][Math.floor(Math.random()*6)];x.style.left=Math.random()*100+'vw';x.style.bottom='-30px';x.style.fontSize=(16+Math.random()*20)+'px';x.style.setProperty('--x',((Math.random()-.5)*180)+'px');x.style.animationDuration=(3+Math.random()*3)+'s';document.body.appendChild(x);setTimeout(()=>x.remove(),6500)}}
+</script>
+</body>
+</html>
